@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:15
+    container_name: meurumo-db
+    restart: always
+    environment:
+      POSTGRES_USER: user_meurumo
+      POSTGRES_PASSWORD: password_meurumo
+      POSTGRES_DB: meurumo_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
