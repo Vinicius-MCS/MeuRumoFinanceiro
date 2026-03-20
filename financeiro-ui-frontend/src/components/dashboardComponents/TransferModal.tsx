@@ -1,4 +1,4 @@
-export const ResetPassword = () => {
+export const TransferModal = () => {
     return(
         <>
         </>
