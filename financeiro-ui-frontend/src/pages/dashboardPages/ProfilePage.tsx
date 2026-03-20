@@ -1,4 +1,4 @@
-export const Cards = () => {
+export const ProfilePage = () => {
     return(
         <>
         </>

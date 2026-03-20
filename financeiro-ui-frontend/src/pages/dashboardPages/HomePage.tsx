@@ -1,4 +1,4 @@
-export const Investment = () => {
+export const HomePage = () => {
     return(
         <>
         </>

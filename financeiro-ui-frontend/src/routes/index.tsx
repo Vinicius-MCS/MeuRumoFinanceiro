@@ -1,25 +1,66 @@
-import { Route, Routes } from "react-router-dom"
-import { Layout } from "../components/layout"
-import { Login } from "../pages/auth/Login"
-import { Home } from "../pages/dashboard/Home"
-import { Investment } from "../pages/dashboard/Investment"
-import { Cards } from "../pages/dashboard/Cards"
-import { Profile } from "../pages/dashboard/Profile"
-import { Register } from "../pages/auth/Register"
-import { ResetPassword } from "../pages/auth/ResetPassword"
+import { createBrowserRouter, Navigate } from "react-router";
+import { AuthLayout } from "../components/layouts/AuthLayout";
+import { DashboardLayout } from "../components/layouts/DashboardLayout";
+import { LoginPage } from "../pages/authPages/LoginPage";
+import { RegisterPage } from "../pages/authPages/RegisterPage";
+import { ForgotPasswordPage } from "../pages/authPages/ForgotPasswordPage";
+import { HomePage } from "../pages/dashboardPages/HomePage";
+import { InvestmentsPage } from "../pages/dashboardPages/InvestmentsPage";
+import { CardsPage } from "../pages/dashboardPages/CardsPage";
+import { ProfilePage } from "../pages/dashboardPages/ProfilePage";
 
-export const Router = () => {
-    return (
-        <Routes>
-            <Route path='/' element={<Layout/>}>
-                <Route index element={<Login/>}></Route>
-                <Route path="/register" element={<Register/>}></Route>
-                <Route path="/reset-password" element={<ResetPassword/>}></Route>
-                <Route path="/home" element={<Home/>}></Route>
-                <Route path="/investment" element={<Investment/>}></Route>
-                <Route path="/cards" element={<Cards/>}></Route>
-                <Route path="/profile" element={<Profile/>}></Route>
-            </Route>
-        </Routes>
-    )
-}
+// Simulação de autenticação (em produção, isso viria de um contexto ou estado global)
+const isAuthenticated = () => {
+    return localStorage.getItem('isAuthenticated') === 'true';
+};
+
+export const router = createBrowserRouter([
+    {
+        path: "/",
+        element: isAuthenticated() ? <Navigate to="/dashboard" replace /> : <Navigate to="/login" replace />,
+    },
+    {
+        path: "/",
+        element: <AuthLayout />,
+        children: [
+            {
+                path: "login",
+                element: <LoginPage />,
+            },
+            {
+                path: "cadastro",
+                element: <RegisterPage />,
+            },
+            {
+                path: "recuperar-senha",
+                element: <ForgotPasswordPage />,
+            },
+        ],
+    },
+    {
+        path: "/dashboard",
+        element: <DashboardLayout />,
+        children: [
+            {
+                index: true,
+                element: <HomePage />,
+            },
+            {
+                path: "investimentos",
+                element: <InvestmentsPage />,
+            },
+            {
+                path: "cartoes",
+                element: <CardsPage />,
+            },
+            {
+                path: "perfil",
+                element: <ProfilePage />,
+            },
+        ],
+    },
+    {
+        path: "*",
+        element: <Navigate to="/login" replace />,
+    },
+]);

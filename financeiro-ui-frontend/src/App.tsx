@@ -1,3 +1,10 @@
+import './styles/globals.css';
+import { RouterProvider } from 'react-router-dom'
+import { router } from './routes'
+
+export default function App() {
+  return <RouterProvider router={router} />;
+}
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import DashboardCard from "./components/DashboardCard";
 import Footer from "./components/Footer";
