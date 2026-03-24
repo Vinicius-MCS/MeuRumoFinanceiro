@@ -1,4 +1,6 @@
 import { Outlet, Navigate } from 'react-router';
+import Navbar from './Navbar';
+import Footer from './Footer';
 
 export function DashboardLayout() {
     const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
@@ -10,7 +12,13 @@ export function DashboardLayout() {
 
     return (
         <div className="min-h-screen bg-gray-100">
-            <Outlet />
+            <Navbar />
+
+            <main className="pb-[80px] min-h-screen overflow-auto">
+                <Outlet />
+            </main>
+
+            <Footer />
         </div>
     );
 }

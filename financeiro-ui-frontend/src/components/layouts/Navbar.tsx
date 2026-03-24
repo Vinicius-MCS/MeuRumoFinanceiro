@@ -29,7 +29,7 @@ const Navbar: React.FC = () => {
         </h1>
 
         <div className="flex items-center gap-8">
-          
+
           <Moon className="w-7 h-7 text-gray-600 cursor-pointer" />
 
           <div className="relative" ref={dropdownRef}>
@@ -43,7 +43,7 @@ const Navbar: React.FC = () => {
 
             {open && (
               <div className="absolute right-0 mt-4 w-96 bg-white rounded-2xl shadow-xl border z-50">
-                
+
                 <div className="px-6 py-4 border-b">
                   <h2 className="text-lg font-semibold">
                     Notificações
